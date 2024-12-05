@@ -1,0 +1,40 @@
+body {
+  background-color: black;
+  min-width: 100vh;
+  padding-bottom: 150px;
+}
+.screen {
+  position: relative;
+  top: 50px;
+  left: 300px;
+}
+
+.download {
+  height: 100px;
+  width: 380px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  position: absolute;
+  top: 400px;
+  left: 435px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.movie {
+  width: auto;
+  height: 90px;
+  margin: 5px;
+}
+.text h2 {
+  color: white;
+  font-size: 16px;
+  font-weight: bolder;
+  font-family: "Arial", sans-serif;
+}
+.text p {
+  color: blue;
+  font-family: "Arial", sans-serif;
+}
