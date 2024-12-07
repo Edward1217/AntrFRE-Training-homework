@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Table</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Region</th>
+          <th scope="col">Model</th>
+          <th scope="col">Sales</th>
+        </tr>
+      </thead>
+      <tbody id="q1"></tbody>
+    </table>
+
+    <div>
+      <label for="region-filter">Region Filter:</label>
+      <select id="region-filter">
+        <option value="All">All</option>
+        <option value="US">US</option>
+        <option value="EU">EU</option>
+        <option value="CA">CA</option>
+      </select>
+      <label for="model-filter">Model Filter:</label>
+      <select id="model-filter">
+        <option value="All">All</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+    </div>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Model</th>
+          <th>Sales</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+  </body>
+</html>
