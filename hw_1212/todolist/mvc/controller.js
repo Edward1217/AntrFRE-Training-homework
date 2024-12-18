@@ -6,23 +6,72 @@ export const Controller = ((model, view) => {
   const todoContainer = document.querySelector(`.${view.domstr.listContainer}`);
   const inputbox = document.querySelector(`.${view.domstr.inputBox}`);
 
+  // const toggleComplete = () => {
+  //   todoContainer.addEventListener("click", (e) => {
+  //     if (e.target.tagName === "LI") {
+  //       const todoElement = e.target;
+  //       const todoId = todoElement.querySelector("button").id;
+
+  //       // Toggle the 'checked' class in the UI
+  //       todoElement.classList.toggle("checked");
+
+  //       // Find and toggle the completed status in the state
+  //       const updatedTodo = state.todolist.find((todo) => +todo.id === +todoId);
+
+  //       if (updatedTodo) {
+  //         updatedTodo.completed = !updatedTodo.completed;
+
+  //         // Update the completed status on the server
+  //         model
+  //           .updateTodo(todoId, {
+  //             id: updatedTodo.id,
+  //             userId: updatedTodo.userId,
+  //             title: updatedTodo.title,
+  //             completed: updatedTodo.completed,
+  //           })
+  //           .then(() => {
+  //             // Optionally, re-render the list to sync state and DOM
+  //             state.todolist = [...state.todolist];
+  //           })
+  //           .catch((error) => {
+  //             console.error("Error updating todo:", error);
+  //           });
+  //       }
+  //     }
+  //   });
+  // };
   const toggleComplete = () => {
     todoContainer.addEventListener("click", (e) => {
       if (e.target.tagName === "LI") {
-        const todoElement = e.target;
-        const todoId = todoElement.querySelector("button").id;
+        const todoElement = e.target; // The clicked list item
+        const todoId = todoElement.querySelector("button").id; // Get the task's ID
 
-        // Toggle the 'checked' class
-        todoElement.classList.toggle("checked");
+        // Find the task in the state
+        const updatedTodo = state.todolist.find((todo) => +todo.id === +todoId);
 
-        // Update the completed status in the state and model
-        state.todolist = state.todolist.map((todo) => {
-          if (+todo.id === +todoId) {
-            todo.completed = !todo.completed;
-            model.updateTodo(todoId, { completed: todo.completed });
-          }
-          return todo;
-        });
+        if (updatedTodo) {
+          // Toggle the completed status
+          updatedTodo.completed = !updatedTodo.completed;
+
+          // Update the DOM to reflect the new status
+          todoElement.classList.toggle("checked");
+
+          // Update the status on the API
+          model
+            .updateTodo(todoId, {
+              id: updatedTodo.id,
+              userId: updatedTodo.userId,
+              title: updatedTodo.title,
+              completed: updatedTodo.completed,
+            })
+            .then(() => {
+              // Optionally sync the state if needed
+              state.todolist = [...state.todolist];
+            })
+            .catch((error) => {
+              console.error("Error updating todo:", error);
+            });
+        }
       }
     });
   };
@@ -44,7 +93,7 @@ export const Controller = ((model, view) => {
         const newtodo = new model.Todo(e.target.value);
 
         model.addTodo(newtodo).then((todo) => {
-          state.todolist = [todo, ...state.todolist]; // The server-generated `id` is used here
+          state.todolist = [todo, ...state.todolist]; // The server-generated `id` is now a number
         });
 
         e.target.value = "";

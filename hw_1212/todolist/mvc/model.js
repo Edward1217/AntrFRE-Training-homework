@@ -28,9 +28,6 @@ export const Model = ((api, view) => {
       // Do not explicitly set the id here
     }
   }
-  const updateTodo = (id, updatedData) => {
-    return api.put(`/todos/${id}`, updatedData); // Example API call for updating
-  };
 
   return {
     ...api,
